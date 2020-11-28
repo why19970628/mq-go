@@ -28,5 +28,5 @@ func TestMQProductAll(t *testing.T)  {
 		"test":"1",
 	}
 	info, _ = json.Marshal(data)
-	MQProduct(string(info), Topic_sandan)
+	MQProduct(string(info), Topic)
 }

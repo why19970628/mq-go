@@ -10,18 +10,19 @@ package common
 import (
 	"context"
 	"fmt"
+	"sync"
+
 	mq_http_sdk "github.com/aliyunmq/mq-http-go-sdk"
 	"github.com/gogap/errors"
 	pool "github.com/jolestar/go-commons-pool"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/ffmt.v1"
-	"sync"
 )
 
 var Log *logrus.Logger
 
 var (
-	Topic_sandan = "your_topic"
+	Topic        = "your_topic"
 	mqCommonPool *pool.ObjectPool
 	once         sync.Once
 	ctx          = context.Background()
@@ -29,8 +30,8 @@ var (
 
 var (
 	mq_endpoint = ""
-	accessKey = ""
-	secretKey = ""
+	accessKey   = ""
+	secretKey   = ""
 )
 
 //MQ数据结构
@@ -65,8 +66,6 @@ func Setup() {
 			}), PoolConfig, WithAbandonedConfig)
 	})
 }
-
-
 
 // 初始化链接类
 func MqLink() (mq_http_sdk.MQClient, error) {
@@ -107,7 +106,7 @@ func MQProduct(data, topic string) error {
 	client, err := MQClient()
 	mqProducer := client.GetProducer(INSTANCEID, topic)
 	msg := mq_http_sdk.PublishMessageRequest{
-		MessageBody: data,         //消息内容
+		MessageBody: data,                //消息内容
 		MessageTag:  "",                  // 消息标签
 		Properties:  map[string]string{}, // 消息属性
 	}
