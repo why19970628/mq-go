@@ -9,7 +9,6 @@ import (
 	"github.com/aliyunmq/mq-http-go-sdk"
 )
 
-
 var (
 	// 设置HTTP接入域名（此处以公共云生产环境为例）
 	MQ_ENDPOINT = "${HTTP_ENDPOINT}"
